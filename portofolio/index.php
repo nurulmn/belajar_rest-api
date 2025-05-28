@@ -11,7 +11,7 @@
   return json_decode($result, true);
 
 }
-
+//API channel youtube 1
 $result= get_CURL('https://www.googleapis.com/youtube/v3/channels?part=snippet,contentDetails,statistics&id=UCpBSzHBGmk49b4IoCtoLdqw&key=AIzaSyClG3lAz9srB9iYN2YwmHguhW_w1Pk6vG0');
 
 
@@ -23,6 +23,21 @@ $subscriber = $result['items'][0]['statistics']['subscriberCount'];
 $urlLatestvideo = ('https://www.googleapis.com/youtube/v3/search?key=AIzaSyClG3lAz9srB9iYN2YwmHguhW_w1Pk6vG0&channelId=UCpBSzHBGmk49b4IoCtoLdqw&maxResults=1&order=date&part=snippet');
 $result = get_CURL($urlLatestvideo);
 $latestVideoId = $result['items'][0]['id']['videoId'];
+
+//API channel youtube 2
+$result= get_CURL('https://www.googleapis.com/youtube/v3/channels?part=snippet,contentDetails,statistics&id=UCpwy6d0JDCNn5Vf9WB1LkDw&key=AIzaSyClG3lAz9srB9iYN2YwmHguhW_w1Pk6vG0');
+
+
+$youtubeProfilePic2 = $result['items'][0]['snippet']['thumbnails']['medium']['url'];
+$channelName2 = $result['items'][0]['snippet']['title'];
+$subscribers = $result['items'][0]['statistics']['subscriberCount'];
+
+//video terakhir ini menggunakan (order date)
+$urlLatestvideo2 = 'https://www.googleapis.com/youtube/v3/search?key=AIzaSyClG3lAz9srB9iYN2YwmHguhW_w1Pk6vG0&channelId=UCpwy6d0JDCNn5Vf9WB1LkDw&maxResults=1&order=date&part=snippet&type=video';
+
+$result = get_CURL($urlLatestvideo2);
+$latestVideoId2 = $result['items'][0]['id']['videoId'];
+
 
 
 ?>
@@ -45,7 +60,7 @@ $latestVideoId = $result['items'][0]['id']['videoId'];
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="#home">Sandhika Galih</a>
+        <a class="navbar-brand" href="#home">Nurul Masya Nabila</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -70,8 +85,8 @@ $latestVideoId = $result['items'][0]['id']['videoId'];
       <div class="container">
         <div class="text-center">
           <img src="img/profile1.png" class="rounded-circle img-thumbnail">
-          <h1 class="display-4">Sandhika Galih</h1>
-          <h3 class="lead">Lecturer | Programmer | Youtuber</h3>
+          <h1 class="display-4">Nurul Masya Nabila</h1>
+          <h3 class="lead">Student of System Information</h3>
         </div>
       </div>
     </div>
@@ -97,7 +112,7 @@ $latestVideoId = $result['items'][0]['id']['videoId'];
     </section>
 
     
-   <!-- Youtube dan IG -->
+   <!-- Youtube -->
 <section class="social bg-light" id="social">
   <div class="container">
     <!-- Judul -->
@@ -107,57 +122,47 @@ $latestVideoId = $result['items'][0]['id']['videoId'];
       </div>
     </div>
 
-    <!-- Konten Utama: YouTube & Instagram -->
+    <!-- Konten Utama: YouTube 1 dan YouTube 2 -->
     <div class="row justify-content-center">
-      <!-- YouTube -->
-      <div class="col-md-5">
+      
+      <!-- YouTube 1 -->
+      <div class="col-md-5 mb-4">
         <div class="row mb-3">
           <div class="col-md-4 text-center">
-            <img src="<?=$youtubeProfilePic;?>" width="100" class="rounded-circle img-thumbnail">
+            <img src="<?= $youtubeProfilePic; ?>" width="100" class="rounded-circle img-thumbnail">
           </div>
           <div class="col-md-8 d-flex flex-column justify-content-center">
-            <h5><?= $channelName;?></h5>
-            <p><?= $subscriber;?> Subcribers.</p>
+            <h5><?= $channelName; ?></h5>
+            <p><?= $subscriber; ?> Subscribers</p>
+            <div class="g-ytsubscribe" data-channelid="UCpBSzHBGmk49b4IoCtoLdqw" data-layout="default" data-count="default"></div>
           </div>
         </div>
-        <div class="row">
-          <div class="col">
-            <div class="embed-responsive embed-responsive-16by9">
-             <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<?= $latestVideoId ?>?rel=0" allowfullscreen></iframe>
-
-            </div>
-          </div>
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<?= $latestVideoId ?>?rel=0" allowfullscreen></iframe>
         </div>
       </div>
 
-      <!-- Instagram -->
-      <div class="col-md-5">
-        <div class="row">
+      <!-- YouTube 2 -->
+      <div class="col-md-5 mb-4">
+        <div class="row mb-3">
           <div class="col-md-4 text-center">
-            <img src="img/profile1.png" width="100" class="rounded-circle img-thumbnail">
+            <img src="<?= $youtubeProfilePic2; ?>" width="100" class="rounded-circle img-thumbnail">
           </div>
-          <div class="col-md-8">
-            <h5>@sandhikagalih</h5>
-            <p>7000 Followers.</p>
+          <div class="col-md-8 d-flex flex-column justify-content-center">
+            <h5><?= $channelName2; ?></h5>
+            <p><?= $subscribers; ?> Subscribers</p>
+            <div class="g-ytsubscribe" data-channelid="UCpwy6d0JDCNn5Vf9WB1LkDw" data-layout="default" data-count="default"></div>
           </div>
         </div>
-
-        <div class="row mt-3 pb-3"></div>
-          <div class="col">
-            <div class="ig-thumbnail">
-              <img src="img/thumbs/1.png" >
-            </div>
-            <div class="ig-thumbnail">
-              <img src="img/thumbs/2.png" >
-            </div>
-            <div class="ig-thumbnail">
-              <img src="img/thumbs/3.png" >
-            </div>
-          </div>
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<?= $latestVideoId2 ?>?rel=0" allowfullscreen></iframe>
+        </div>
       </div>
+
     </div>
   </div>
 </section>
+
 
 
 
@@ -309,5 +314,6 @@ $latestVideoId = $result['items'][0]['id']['videoId'];
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://apis.google.com/js/platform.js"></script>
   </body>
 </html>
