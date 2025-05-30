@@ -36,6 +36,23 @@ $urlLatestvideo2 = 'https://www.googleapis.com/youtube/v3/search?key=AIzaSyClG3l
 $result = get_CURL($urlLatestvideo2);
 $latestVideoId2 = $result['items'][0]['id']['videoId'];
 
+// Instagram API
+// $clientId = 'f0b022fbe68c4ae79dd51169af18feb4';
+$accessToken = 'IGAA6cqDQZC1jhBZAE0tZA013Ynp1Sjc5elhzaC1VbFJ1X0dRakVZAM3BacWhfMXFTUGZAkTmtPMkhscmh3ei0wMThTYjR3LVBHNTRIOFB6RnktVXJRdk53dEM2UEJTUGFlODVjNV9ERTVyckhDWWFkT2thSDdoZAVo3Wk84NHZA0cHBBTQZDZD';
+
+$result = get_CURL('https://graph.instagram.com/v22.0/me?fields=username,profile_picture_url,followers_count&access_token=IGAA6cqDQZC1jhBZAE0tZA013Ynp1Sjc5elhzaC1VbFJ1X0dRakVZAM3BacWhfMXFTUGZAkTmtPMkhscmh3ei0wMThTYjR3LVBHNTRIOFB6RnktVXJRdk53dEM2UEJTUGFlODVjNV9ERTVyckhDWWFkT2thSDdoZAVo3Wk84NHZA0cHBBTQZDZD');
+$usernameIG = $result['username'];
+$profilePictureIG = $result['profile_picture_url'];
+$followersIG = $result['followers_count'];
+
+$result = get_CURL('https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,timestamp&access_token=IGAA6cqDQZC1jhBZAE0tZA013Ynp1Sjc5elhzaC1VbFJ1X0dRakVZAM3BacWhfMXFTUGZAkTmtPMkhscmh3ei0wMThTYjR3LVBHNTRIOFB6RnktVXJRdk53dEM2UEJTUGFlODVjNV9ERTVyckhDWWFkT2thSDdoZAVo3Wk84NHZA0cHBBTQZDZD');
+$photos = [];
+foreach ($result['data'] as $photo) {
+    $photos[] = $photo['media_url'];
+}
+
+
+
 
 
 ?>
@@ -125,14 +142,14 @@ $latestVideoId2 = $result['items'][0]['id']['videoId'];
     <!-- Judul -->
     <div class="row pt-4 mb-4">
       <div class="col text-center">
-        <h2>Video Playlist</h2>
+        <h2>Social Media</h2>
       </div>
     </div>
 
-    <!-- Konten Utama: YouTube 1 dan YouTube 2 -->
+    <!-- Konten Utama: YouTube dan instagram-->
     <div class="row justify-content-center">
       
-      <!-- YouTube 1 -->
+      <!-- youtube-->
       <div class="col-md-5 mb-4">
         <div class="row mb-3">
           <div class="col-md-4 text-center">
@@ -150,21 +167,29 @@ $latestVideoId2 = $result['items'][0]['id']['videoId'];
       </div>
 
       <!-- YouTube 2 -->
-      <div class="col-md-5 mb-4">
-        <div class="row mb-3">
-          <div class="col-md-4 text-center">
-            <img src="<?= $youtubeProfilePic2; ?>" width="100" class="rounded-circle img-thumbnail">
-          </div>
-          <div class="col-md-8 d-flex flex-column justify-content-center">
-            <h5><?= $channelName2; ?></h5>
-            <p><?= $subscribers; ?> Subscribers</p>
-            <div class="g-ytsubscribe" data-channelid="UCpwy6d0JDCNn5Vf9WB1LkDw" data-layout="default" data-count="default"></div>
-          </div>
+      <div class="col-md-5">
+      <div class="row">
+        <div class="col-md-4">
+          <img src="<?= $profilePictureIG; ?>" width="100" class="rounded-circle img-thumbnail">
         </div>
-        <div class="embed-responsive embed-responsive-16by9">
-          <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<?= $latestVideoId2 ?>?rel=0" allowfullscreen></iframe>
+        <div class="col-md-8">
+          <h5><?= $usernameIG; ?></h5>
+          <p><?= $followersIG; ?> Followers.</p>
         </div>
       </div>
+      <div class="row mt-3 pb-3">
+         <div class="col">
+    <?php foreach ($photos as $photo) : ?>
+      <div class="ig-thumbnail">
+        <img src="<?= $photo; ?>">
+      </div>
+      <?php endforeach; ?>
+    </div>
+    </div>
+
+    </div>
+      
+ 
 
     </div>
   </div>
